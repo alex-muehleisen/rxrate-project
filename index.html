@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>RxRate, by RxAll</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" type="text/css" href="styles.css">
+  <link rel="shortcut icon" type="image/png" href="RxAllLogo.png" height="16" width="16">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+  <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148351581-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-148351581-1');
+  </script>
+
+</head>
+
+<body>
+  <header class="header">
+    <!-- main navigation tab -->
+    <div class="nav">
+
+      <!-- Design RxRate Logo that links back to homepage (index) -->
+      <a id="rxRateLogo" href="index.html"><img src="Images/RxRate-Final-Logo-White.png" alt="RxRate Logo with RxAll" height="160"></a>
+      <!-- Create navigation items -->
+      <div class="topNav" id="myTopnav">
+        <a class="active" href="home.html">HOME</a>
+        <a href="aboutRxRate.html">ABOUT RxRATE™</a>
+        <a href="aboutRxAll.html">ABOUT RxALL™</a>
+        <a href="contactUs.html">CONTACT US</a>
+        <a href="https://www.rxall.net/learn-more" target="_blank">PRESS</a>
+        <a href="javascript:void(0);" class="navIcon" onclick="navFunction()"> <img src="Icons/list-view-24.png" alt="More Nav Items" height=26px></a>
+      </div>
+
+      <!-- js responsive navbar -->
+
+      <script type="text/javascript">
+        function navFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topNav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topNav";
+          }
+        }
+      </script>
+
+      <!-- Sign Up, logout and Inbox section -->
+      <div class="nav-wrapper">
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="logged-out signupFeature registerButton" style="display: none;">
+            <a href="#" class="white-text modal-trigger" data-target="modal-signup">Sign Up</a>
+          </li>
+          <li class="logged-out signupFeature loginButton" style="display: none;">
+            <a href="#" class="white-text modal-trigger" data-target="modal-login">Login</a>
+          </li>
+          <li class="logged-in signupFeature accountButton" style="display: none;">
+            <a href="#" class="white-text modal-trigger" data-target="modal-account">Account</a>
+          </li>
+          <li class="logged-in signupFeature logoutButton" style="display: none;">
+            <a href="#" class="white-text" id="logout">Logout</a>
+          </li>
+        </ul>
+      <!-- Create Notifications Bar -->
+      <!-- <div class="inbox">
+        <button class="buttons inboxButton" type="button">
+          <span>INBOX</span><span class="inboxBadge">6</span>
+        </button>
+      </div> -->
+      </div>
+
+  </header>
+
+  <!-- USER SIGN UP MODAL -->
+  <div id="modal-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up for RxRate™</h4><br/>
+      <form id="signup-form">
+        <div class="input-field">
+          <input type="email" id="signup-email" required />
+          <label for="signup-email">Email address:*</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="signup-password" required />
+          <label for="signup-password">Choose password:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-firstname" required />
+          <label for="signup-firstname">First name:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-lastname" required />
+          <label for="signup-lastname">Last name:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-username" required />
+          <label for="signup-username">Choose username:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-country" required />
+          <label for="signup-country">Country of residence:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-age" />
+          <label for="signup-age">Age:</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-gender" />
+          <label for="signup-gender">Gender:</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="signup-ethnicity" />
+          <label for="signup-ethnicity">Ethnicity:</label>
+        </div>
+        <div class="input-field" style="padding-bottom: 35px;">
+          <input type="checkbox" id="signup-privacy" required />
+          <label for="signup-ethnicity">By signing up for RxRate™, I accept the <a href="https://app.termly.io/">Terms of Use</a> and <a href="https://app.termly.io/">Privacy Policy</a>.</label>
+        </div>
+        <button class="btn amber darken-1 z-depth-0">Sign up</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- LOGIN MODAL -->
+  <div id="modal-login" class="modal">
+    <div class="modal-content">
+      <h4>Login with an existing account</h4><br />
+      <form id="login-form">
+        <div class="input-field">
+          <input type="email" id="login-email" required />
+          <label for="login-email">Email address</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="login-password" required />
+          <label for="login-password">Your password</label>
+        </div>
+        <button class="btn yellow darken-2 z-depth-0">Login</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- PHARMACY SIGN UP MODAL -->
+  <div id="modal-pharmacy-signup" class="modal">
+    <div class="modal-content">
+      <h4>Sign up for RxRate™</h4><br/>
+      <form id="pharmacy-signup-form">
+        <div class="input-field">
+          <input type="email" id="pharmacy-signup-email" required />
+          <label for="pharmacy-signup-email">Pharmacy email address:*</label>
+        </div>
+        <div class="input-field">
+          <input type="password" id="pharmacy-signup-password" required />
+          <label for="pharmacy-signup-password">Choose password:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="pharmacy-signup-name" required />
+          <label for="pharmacy-signup-name">Name of Pharmacy:*</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="pharmacy-signup-method" required />
+          <label for="pharmacy-signup-method">Preferred method to be contacted by us at:* (Email, Facebook, etc.)</label>
+        </div>
+        <div class="input-field">
+          <input type="text" id="pharmacy-signup-contact" required />
+          <label for="pharmacy-signup-contact">Please list the email/facebook name, etc. that you would like to be contacted at:*</label>
+        </div>
+        <div class="input-field" style="padding-bottom: 35px;">
+          <input type="checkbox" value="Submit" />
+          <label for="signup-ethnicity">By signing up for RxRate™, I accept the <a href="https://app.termly.io/">Terms of Use</a> and <a href="https://app.termly.io/">Privacy Policy</a>.</label>
+        </div>
+        <button class="btn amber darken-1 z-depth-0">Sign up</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ACCOUNT MODAL -->
+  <div id="modal-account" class="modal">
+    <div class="modal-content center-align">
+      <h4>Account details</h4><br />
+      <div class="account-details"></div>
+    </div>
+  </div>
+
+  <div id="searchContainer">
+    <div id="searchBarContainer">
+      <input type="text" id="locationInput" placeholder="Search location:"/>
+      <!-- <label for="refineSearch">Sort by:</label>
+      <select id="refineSearch" label="Refine">
+        <option value="" disabled selected> Select <option/>
+        <option value="type">Distance</option>
+        <option value="type">Rating</option>
+      </select> -->
+      <input type="button" id="searchButton" value="Go"/>
+    </div>
+  </div>
+
+  <!-- Map appears here -->
+  <div id="map"></div>
+
+  <script src="scripts/app.js"></script>
+
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDKp8-6y1GHZUzCp0ifcUEE4xSD3H-8E64&libraries=places&callback=initMap">
+  </script>
+
+
+  <!-- Add a generic sidebar -->
+  <!-- The slide-out panel for showing place details -->
+  <div id="mySidebar" class="sidebar" style="width:0;" style="font-family: 'Avenir Next', Avenir, sans-serif;">
+
+    <div id="mySidebarNav" class="sidebarNav">
+      <a id="sidebarLogo" class="sidebarRxRate" href="home.html"><img src="Images/RxRate-Final-Logo-White.png" alt="RxRate Logo" width="120"></a>
+      <a id="close" href="javascript:void(0)" class="closeButton" onclick="closeSidebar()">&times;</a>
+    </div>
+
+    <script type="text/javascript">
+    function closeSidebar() {
+        document.getElementById("mySidebar").style.width = "0";
+      }
+    </script>
+
+    <h1 id="pharmacyName"></h1>
+    <!-- <div id="pharmacyPrice"></div> -->
+    <div id="photosCarousel">
+      <div class="slides">
+        <div class="imageDiv">
+          <img id="photo1">
+        </div>
+      </div>
+    </div> <!-- carousel end -->
+
+    <div class="container main-ratings-container">
+      <div id="agg-RxRate-rating">
+        <h3>RxRate™ Rating:</h3>
+        <div class="mainStarsContainer rxrateAggRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </div>
+      </div>
+
+      <div id="agg-Customer-rating">
+        <h3>Customer Rating:</h3>
+        <div class="mainStarsContainer customerAggRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star">
+            <svg xmlns="http://www.w3.org/2000/svg" height="18px" width="18px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </div>
+      </div>
+    </div>      <!--  end main ratings section -->
+
+
+    <div class="hours-container">
+      <div id="monday"></div>
+      <div id="tuesday"></div>
+      <div id="wednesday"></div>
+      <div id="thursday"></div>
+      <div id="friday"></div>
+      <div id="saturday"></div>
+      <div id="sunday"></div>
+    </div>
+
+    <div id="dis-RxRate-Rating">
+      <h2 id="rxrate-head">RxRate™ Rating</h2>
+      <div class="disaggContainer">
+        Drug Validity:
+        <span class="disaggStarsContainer validityRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </span>
+      </div>
+      <div class="disaggContainer storage-container">
+        Storage:
+        <span class="starsContainer disaggStarsContainer storageRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </span>
+      </div>
+      <div class="disaggContainer">
+        Handling:
+        <span class="starsContainer disaggStarsContainer handlingRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </span>
+      </div>
+      <div class="disaggContainer">
+        Regulation:
+        <span class="starsContainer disaggStarsContainer regulationRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </span>
+      </div>
+      <div class="disaggContainer">
+        Ambience:
+        <span class="starsContainer disaggStarsContainer ambienceRating">
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+          <span class="ui-star starChecked">
+            <svg xmlns="http://www.w3.org/2000/svg" height="16px" width="16px" viewBox="0 0 49.94 49.94" class="undefined"><path d="M48.856 22.73c0.983-0.958 1.33-2.364 0.906-3.671 -0.425-1.307-1.532-2.24-2.892-2.438l-12.092-1.757c-0.515-0.075-0.96-0.398-1.19-0.865L28.182 3.043c-0.607-1.231-1.839-1.996-3.212-1.996 -1.372 0-2.604 0.765-3.211 1.996L16.352 14c-0.23 0.467-0.676 0.79-1.191 0.865L3.069 16.622c-1.359 0.197-2.467 1.131-2.892 2.438 -0.424 1.307-0.077 2.713 0.906 3.671l8.749 8.528c0.373 0.364 0.544 0.888 0.456 1.4L8.224 44.701c-0.183 1.06 0.095 2.091 0.781 2.904 1.066 1.267 2.927 1.653 4.415 0.871l10.814-5.686c0.452-0.237 1.021-0.235 1.472 0l10.815 5.686c0.526 0.277 1.087 0.417 1.666 0.417 1.057 0 2.059-0.47 2.748-1.288 0.687-0.813 0.964-1.846 0.781-2.904l-2.065-12.042c-0.088-0.513 0.083-1.036 0.456-1.4L48.856 22.73z" class="undefined"/></svg>
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <div id="dis-Customer-Rating">
+      <h2 class="customer-heading">Rate this Pharmacy</h2>
+      <div class="lightscript-container">(Your rating will contribute towards the overall Customer Rating for this pharmacy)</div>
+
+      <div class="clickContainer validity-container">
+        Drug Validity:
+        <span class="clickStars-rating">
+          <input type="radio" name="rating" id="rating-5">
+          <label for="rating-5"></label>
+          <input type="radio" name="rating" id="rating-4">
+          <label for="rating-4"></label>
+          <input type="radio" name="rating" id="rating-3">
+          <label for="rating-3"></label>
+          <input type="radio" name="rating" id="rating-2">
+          <label for="rating-2"></label>
+          <input type="radio" name="rating" id="rating-1">
+          <label for="rating-1"></label>
+        </span>
+      </div>
+
+      <div class="clickContainer storage-container">
+        Storage:
+        <span class="clickStars-rating storage-rating">
+          <input type="radio" name="storing" id="storing-5">
+          <label for="storing-5"></label>
+          <input type="radio" name="storing" id="storing-4">
+          <label for="storing-4"></label>
+          <input type="radio" name="storing" id="storing-3">
+          <label for="storing-3"></label>
+          <input type="radio" name="storing" id="storing-2">
+          <label for="storing-2"></label>
+          <input type="radio" name="storing" id="storing-1">
+          <label for="storing-1"></label>
+        </span>
+      </div>
+
+      <div class="clickContainer handling-container">
+        Handling:
+        <span class="clickStars-rating">
+          <input type="radio" name="handle" id="handle-5">
+          <label for="handle-5"></label>
+          <input type="radio" name="handle" id="handle-4">
+          <label for="handle-4"></label>
+          <input type="radio" name="handle" id="handle-3">
+          <label for="handle-3"></label>
+          <input type="radio" name="handle" id="handle-2">
+          <label for="handle-2"></label>
+          <input type="radio" name="handle" id="handle-1">
+          <label for="handle-1"></label>
+        </span>
+      </div>
+
+      <div class="clickContainer regulation-container">
+        Regulation:
+        <span class="clickStars-rating">
+          <input type="radio" name="regulator" id="regulator-5">
+          <label for="regulator-5"></label>
+          <input type="radio" name="regulator" id="regulator-4">
+          <label for="regulator-4"></label>
+          <input type="radio" name="regulator" id="regulator-3">
+          <label for="regulator-3"></label>
+          <input type="radio" name="regulator" id="regulator-2">
+          <label for="regulator-2"></label>
+          <input type="radio" name="regulator" id="regulator-1">
+          <label for="regulator-1"></label>
+        </span>
+      </div>
+
+      <div class="clickContainer ambience-container">
+        Ambience:
+        <span class="clickStars-rating">
+          <input type="radio" name="room" id="room-5">
+          <label for="room-5"></label>
+          <input type="radio" name="room" id="room-4">
+          <label for="room-4"></label>
+          <input type="radio" name="room" id="room-3">
+          <label for="room-3"></label>
+          <input type="radio" name="room" id="room-2">
+          <label for="room-2"></label>
+          <input type="radio" name="room" id="room-1">
+          <label for="room-1"></label>
+        </span>
+      </div>
+
+    </div> <!-- end customer rating -->
+
+    <div id="learnMoreID" class="container learnMore-container">
+      <a href=aboutRxRate.html>Learn more about these ratings:</a>
+    </div>
+
+    <div id="contactSectionID" class="contact-details-container">
+      <h2>Find This Pharmacy</h2>
+      <div class="contactIcon-container">
+        <img src="Icons/addressIcon-64px.png" alt="Address Icon" height="27px">
+        <span id="address"></span>
+      </div>
+      <div class="contactIcon-container">
+        <img src="Icons/call-Icon-48px.png" alt="Call Icon" height="27px">
+        <span id="phoneNumber"></span>
+      </div>
+      <div class="contactIcon-container">
+        <img src="Icons/messageIcon40.png" alt="Message Icon" height="27px">
+        <a href="#">Message this pharmacy...</a> <br> <br>
+      </div>
+    </div>
+
+    <div id="reviewSection">
+      <input id="reviewInput" type="text" placeholder="Write a review of this pharmacy...">
+    </div>
+    <div id="reviewButtonID" class="container">
+      <button type="submit">Submit</button>
+    </div>
+
+    <div id="malpracticeID" class="container">
+      <button type="submit">
+        Report this pharmacy for malpractice
+      </button>
+    </div>
+
+
+    <br> <br> <br>
+
+
+  </div> <!-- sidebar end -->
+
+
+  <footer>
+    <div class="footer">
+      <!-- Same as main navigation but with icon links to RxScanner, StorsApp, and social media -->
+      <a id="rxRateLogo" href="index.html"><img src="Images/RxRate-Final-Logo-White.png" alt="RxRate Logo with RxAll" height="100px">
+      </a>
+      <!-- Create navigation items -->
+      <div class="foot-right">
+        <a href="https://www.facebook.com/RxAll.Inc/" target="_blank"><img src="Icons/facebook.png" alt="Facebook Link" height="40"></a>
+        <a href="https://twitter.com/rxall_inc?lang=en" target="_blank"><img src="Icons/twitter.png" alt="Twitter Link" height="40"></a>
+        <a href="https://www.linkedin.com/company/storsapp-inc" target="_blank"><img src="Images/storsapp.png" alt="StorsApp Logo" height="40"></a>
+        <a href="https://www.rxall.net/" target="_blank"><img src="Images/RxAllLogoWhite.png" alt="RxAll Logo" height="47"></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-functions.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-messaging.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-storage.js"></script>
+
+  <script type="text/javascript">
+    // initialize firebase
+    var config = {
+    apiKey: "AIzaSyDL6LmjJMz2LaIZTbh9DQucPfL9gmh5HAU",
+    authDomain: "rxrate-cc4ae.firebaseapp.com",
+    databaseURL: "https://rxrate-cc4ae.firebaseio.com",
+    projectId: "rxrate-cc4ae",
+    storageBucket: "rxrate-cc4ae.appspot.com",
+    messagingSenderId: "312150647902",
+    appId: "1:312150647902:web:6717d81a3f4f072adcc0cf"
+    };
+    firebase.initializeApp(config);
+
+    // make auth and firestore references
+     const auth = firebase.auth();
+     const database = firebase.firestore();
+  </script>
+
+  <!-- Compiled and minified JavaScript from Materialize-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="scripts/index.js"></script>
+  <script src="scripts/auth.js"></script>
+
+</body>
+
+</html>

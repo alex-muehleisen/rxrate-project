@@ -1,0 +1,119 @@
+* {
+ box-sizing: border-box;
+ font-family: 'Avenir Next', 'Avenir', sans-serif;
+ color: #5f5f5f;
+ background-color: #336666;
+}
+
+.login-nav {
+  width: auto;
+  height: auto;
+}
+
+.mainBox {
+  margin-bottom: 2.5%;
+  width: 100%;
+  height: 600px;
+  border: 1px solid #336666;
+}
+
+.rightBox {
+  border-radius: 12px;
+  border: 3px solid rgb(155, 206, 205);
+  background-color: #FFFAFA;
+  width: 71%;
+  float: right;
+  height: 20%;
+  margin-right: 6%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainTitle {
+  background-color: #FFFAFA;
+  color: grey;
+  font-size: 1.8em;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  margin-right: 18%;
+}
+
+.rxTag {
+  background-color: #FFFAFA;
+  padding: 0 22px;
+}
+
+.first-words {
+  color: #778899;
+  margin-bottom: 10px;
+}
+
+.rxrateTag {
+  color: #336666;
+  font-size: 1.9em;
+  margin-top: 12px;
+}
+
+.mainSignUp {
+  margin-top: 16%;
+  margin-left: 2.5%;
+  width: 95%;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  text-align: center;
+}
+
+.homeButton {
+  background-color: #FFFAFA;
+  text-decoration: none;
+  font-size: 5em;
+  font-weight: bold;
+  border-radius: 13px;
+  padding: 50px;
+  color: #336666;
+  width: 35%;
+  text-align: center;
+}
+
+.homeButton:hover {
+  background-color: #ffb300;
+  color: #FFFAFA;
+  transition-duration: 1.8s;
+}
+
+.modal {
+  border-radius: 12px;
+  border: 3px solid rgb(155, 206, 205);
+}
+
+input {
+  color: #FFFAFA;
+  font-weight: lighter;
+}
+
+h4 {
+  color: #FFFAFA;
+  font-weight: bold;
+}
+
+.footer {
+  border-top: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer a {
+  float: left;
+  text-align: center;
+  padding: 0 25px;
+}
+
+.foot-right {
+  float: right;
+  padding: 35px 25px 0 0;
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Pharmacy HomePage | RxRate</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<!--
+place link to icons8 and flaticon
+<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/"                 title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/"                 title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+
+-->
+
+<body>
+
+  <header class="header main-header">
+    <!-- main navigation tab -->
+    <nav class="nav main-nav">
+
+      <!-- Design RxRate Logo that links back to homepage (index) -->
+      <a id="rxRateLogo" href="index.html"><img src="Images/RxRate-Final-Logo-White.png" alt="RxRate Logo with RxAll" height="160"></a>
+      <!-- Create navigation items -->
+      <div class="topNav" id="myTopnav">
+        <a class="active" href="pharmacyHome.html">HOME</a>
+        <a href="aboutRxRate.html">ABOUT RxRATE™</a>
+        <a href="aboutRxAll.html">ABOUT RxALL™</a>
+        <a href="contactUs.html">CONTACT US</a>
+        <a href="https://www.rxall.net/learn-more" target="_blank">PRESS</a>
+        <a href="javascript:void(0);" class="navIcon" onclick="navFunction()"> <img src="Icons/list-view-24.png" alt="More Nav Items" height=20px></a>
+      </div>
+
+      <!-- js responsive navbar -->
+
+      <script type="text/javascript">
+        function navFunction() {
+          var x = document.getElementById("myTopnav");
+          if (x.className === "topNav") {
+            x.className += " responsive";
+          } else {
+            x.className = "topNav";
+          }
+        }
+      </script>
+
+      <!-- Sign In and Inbox section -->
+      <div class="button-group">
+        <!-- create Sign In button -->
+        <button id="signInID" class="buttons signInButton" type="button" onclick="location.href='pharmacyHome.html'">
+          SIGN IN
+        </button>
+        <!-- create Sign Up button -->
+        <button id="signUpID" class="buttons signUpButton" type="button">
+          SIGN UP
+        </button>
+        <!-- Create Notifications Bar -->
+        <div class="inbox">
+          <button class="buttons inboxButton" type="button">
+            <span>INBOX</span><span class="inboxBadge">6</span>
+          </button>
+        </div>
+      </div>
+
+    </nav>
+
+    <div id="signUpModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="signUpClose">&times;</span>
+          <h3>Sign Up for RxRate™</h3>
+        </div>
+        <div class="modal-body">
+          <div class="signUpElement">
+            <span><strong>What Kind of User are You?*</strong><span> <br>
+            <input type="radio" name="userType" value="individual"> Individual User <br>
+            <input type="radio" name="userType" value="pharmacy"> Pharmacy/User Representing a Pharmacy
+          </div>
+          <div class="signUpElement">
+            <label for="firstName"><strong>First Name*:</strong></label>
+            <input type="text" name="firstName" placeholder="Enter your first name...">
+          </div>
+          <div class="signUpElement">
+            <label for="lastName"><strong>Last Name*:</strong></label>
+            <input type="text" name="lastName" placeholder="Enter your last name...">
+          </div>
+          <div class="signUpElement">
+            <label for="email"><strong>Email*:</strong></label>
+            <input type="text" name="email" placeholder="Enter email...">
+          </div>
+          <div class="signUpElement">
+            <label for="username"><strong>Username*:</strong></label>
+            <input type="text" name="username" placeholder="Create username... (shown on messages, reviews, etc.)">
+          </div>
+          <div class="signUpElement">
+            <label for="password"><strong>Password*:</strong></label>
+            <input type="text" name="password" placeholder="Create password...">
+          </div>
+          <div class="signUpElement">
+            <label for="confirmPassword"><strong>Confirm Password*:</strong></label>
+            <input type="text" name="confirmPassword" placeholder="Confirm password...">
+          </div>
+          <div class="signUpElement">
+            <label for="userAge"><strong>Age:</strong></label>
+            <input type="text" name="userAge" placeholder="Enter your age...">
+          </div>
+          <div class="signUpElement">
+            <label for="userGender"><strong>Gender:</strong></label>
+            <input type="text" name="userGender" placeholder="Enter your gender...">
+          </div>
+          <div class="signUpElement">
+            <label for="userEthnicity"><strong>Ethnicity:</strong></label>
+            <input type="text" name="userEthnicity" placeholder="Enter your ethnicity...">
+          </div>
+          <div class="signUpElement">
+            <label for="employmentStatus"><strong>Employment Status:</strong></label>
+            <input type="text" name="employmentStatus" placeholder="Enter your employment status...">
+          </div>
+          <div class="signUpElement">
+            <label for="userCountry"><strong>Country*:</strong></label>
+            <input type="text" name="userCountry" placeholder="Enter your country of residence...">
+          </div>
+          <div class="signUpElement">
+            <input type="checkbox" name="privacyForm" value="Agree"> I accept the <a href="https://app.termly.io/">Terms of Use</a> and <a href="https://app.termly.io/">Privacy Policy</a>.
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="signUpSubmit" type="button" name="Submit" onclick="location.href='pharmacyHome.html'">Sign Up</button>
+          <h4>Already signed up? Sign in <a href="pharmacyHome.html">here</a></h4>
+        </div>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var modal = document.getElementById("signUpModal");
+      var btn = document.getElementById("signUpID");
+      var span = document.getElementsByClassName("signUpClose")[0];
+
+      btn.onclick = function() {
+        modal.style.display = "block";
+      }
+
+      span.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+    </script>
+
+  </header>
+
+  <section>
+    <div class="container secondary-page-container pharmacyHome-container">
+      <div class="container page-title-container rxrate-title-container">
+        <h1>Example Pharmacy</h1>
+      </div>
+      <div class="container secondary-page-body about-rxrate-body">
+        <h2>Review Your Profile</h2>
+        <p>
+          Example text.
+        </p>
+        <h2>Review Comments and Reviews on Your Profile</h2>
+        <p>
+          Example comments and reviews.
+        </p>
+        <h2>Review Messages from Users</h2>
+        <p>
+          Example messages.
+        </p>
+        <h2>View Your Ratings</h2>
+        <p>Your Rating, as rated by RxRate™:</p>
+        <p>Your Rating, as rated by your customers</p>
+        <h2>Learn How You Can Improve Your Ratings:</h2>
+        <p>
+          <strong>1. Drug Validity:</strong> <i>Does this pharmacy authenticate their drugs?</i>
+        </p>
+        <p class="subtext">
+          This component of our rating handles the quality of the purchased good. A simple check of this is to look for the use of the RxScanner™, usually advertised in some manner by the pharmacy itself. Registered pharmaseutical users of the RxScanner™ will also be shown on the RxRate™ platform.
+        </p>
+        <p>
+          <strong>2. Storage:</strong> <i>Does this pharmacy have air-conditioning?</i>
+        </p>
+        <p class="subtext">
+          This component deals with a pharmacy's existing storage procedures. Medicines and drugs must be kept at a low-room-temperature in order to maintain their potency. The clearest indicator of whether a pharmacy is maintaining this standard is to check for air-conditioning.
+        </p>
+        <p>
+          <strong>3. Handling:</strong> <i>What is the shelf-arrangement of the pharmacy like?</i>
+        </p>
+        <p class="subtext">
+          This component targets how pharmacies manage goods once they arrive in the pharmacy. The most efficient method of measuring this is to look at how a pharmacy arranges drugs and medicines in their store. Medicines should be kept out of sunlight, or other heated areas, and should be well-looked after. A neat and well thought-out shelf-arrangement is a very strong gauge of this level of careful goods management.
+        </p>
+        <p>
+          <strong>4. Regulation:</strong> <i>Is a pharmacist supervising the pharmacy and helping customers?</i>
+        </p>
+        <p class="subtext">
+          This component works twofold to augment the assesment of maintenance and care of goods explored in other components, as well as to gain some insight into the quality of service a pharmacy provides. The presence of a qualified pharmacist working in the pharmacy to manage goods and advise customers is a fundamental criterion in this context.
+        </p>
+        <p>
+          <strong>5. Ambience:</strong> <i>How clean is the pharmacy?</i>
+        </p>
+        <p class="subtext">
+          This component tackles the overall feel of the pharmacy. It complements the clear-cut objectiveness of the other components with some subjectiveness, giving customers a deeper perception of two levels of pharmaseutical assessment.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <footer class= "main-footer">
+    <nav class= "footer-nav">
+      <!-- Same as main navigation but with icon links to RxScanner, StorsApp, and social media -->
+      <a id="rxRateLogo" href="index.html"><img src="Images/RxRate-Final-Logo-White.png" alt="RxRate Logo with RxAll" height="100px">
+      </a>
+      <!-- Create navigation items -->
+      <div class="footer-right">
+        <a href="https://www.rxall.net/" target="_blank"><img src="Images/RxAllLogo.png" alt="RxAll Logo" height="52"></a>
+        <a href="https://www.rxall.net/"><img src="Images/storsapp.png" alt="StorsApp Logo" height="50"></a>
+      </div>
+    </nav>
+  </footer>
+
+  <!-- The core Firebase JS SDK -->
+  <script src="/__/firebase/6.3.3/firebase-app.js"></script>
+
+  <!-- Add SDKs for Firebase products
+       https://firebase.google.com/docs/web/setup#reserved-urls -->
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+
+</body>
+</html>
